@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="txtCamera" type="id" />
+    <item name="imgCameraCode" type="id" />
+    <item name="imgCameraInfo" type="id" />
+    <item name="imgCamera" type="id" />
+    <item name="fab_add_camera_photo" type="id" />
+</resources>

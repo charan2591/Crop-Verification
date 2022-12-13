@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_7">7dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_13">13dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_17">17dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_23">23dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="margin_27">27dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_33">33dp</dimen>
+    <dimen name="margin_35">35dp</dimen>
+    <dimen name="margin_37">37dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_43">43dp</dimen>
+    <dimen name="margin_45">45dp</dimen>
+    <dimen name="margin_47">47dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_53">53dp</dimen>
+    <dimen name="margin_55">55dp</dimen>
+
+    <dimen name="padding_3">3dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_7">7dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_13">13dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_17">17dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_23">23dp</dimen>
+    <dimen name="padding_25">25dp</dimen>
+    <dimen name="padding_27">27dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
+    <dimen name="padding_33">33dp</dimen>
+    <dimen name="padding_35">35dp</dimen>
+    <dimen name="padding_37">37dp</dimen>
+    <dimen name="padding_40">40dp</dimen>
+    <dimen name="padding_43">43dp</dimen>
+    <dimen name="padding_45">45dp</dimen>
+    <dimen name="padding_47">47dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+    <dimen name="padding_53">53dp</dimen>
+    <dimen name="padding_55">55dp</dimen>
+
+
+    <dimen name="txt_size_3">3sp</dimen>
+    <dimen name="txt_size_5">5sp</dimen>
+    <dimen name="txt_size_7">7sp</dimen>
+    <dimen name="txt_size_10">10sp</dimen>
+    <dimen name="txt_size_13">13sp</dimen>
+    <dimen name="txt_size_15">15sp</dimen>
+    <dimen name="txt_size_17">17sp</dimen>
+    <dimen name="txt_size_20">20sp</dimen>
+    <dimen name="txt_size_23">23sp</dimen>
+    <dimen name="txt_size_25">25sp</dimen>
+    <dimen name="txt_size_27">27sp</dimen>
+    <dimen name="txt_size_30">30sp</dimen>
+    <dimen name="txt_size_33">33sp</dimen>
+    <dimen name="txt_size_35">35sp</dimen>
+    <dimen name="txt_size_37">37sp</dimen>
+    <dimen name="txt_size_40">40sp</dimen>
+    <dimen name="txt_size_43">43sp</dimen>
+    <dimen name="txt_size_45">45sp</dimen>
+    <dimen name="txt_size_47">47sp</dimen>
+    <dimen name="txt_size_50">50sp</dimen>
+    <dimen name="txt_size_53">53sp</dimen>
+    <dimen name="txt_size_55">55sp</dimen>
+
+
+</resources>

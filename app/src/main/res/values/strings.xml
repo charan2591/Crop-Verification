@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Crop Verification</string>
+    <string name="app_name_hindi">फसल सत्यापन</string>
+
+    <string name="action_github">Github Repository</string>
+    <string name="dept_name">DEPARTMENT OF AGRICULTURE AND FARMERS WELFARE, HARYANA/कृषि और किसान कल्याण विभाग, हरियाणा</string>
+    <string name="dept_name_hindi">कृषि और किसान कल्याण विभाग, हरियाणा</string>
+
+    <string name="action_camera_only">Camera Only</string>
+    <string name="action_gallery_only">Gallery Only</string>
+
+    <string name="mobile_required">Mobile number is required/मोबाइल नंबर की आवश्यकता है</string>
+    <string name="family_id_required">Family Id is required/परिवार की पहचान आवश्यक है</string>
+    <string name="valid_mobile_required">10 digit valid mobile number is required/10 अंकों का वैध मोबाइल नंबर आवश्यक है</string>
+    <string name="invalid_mobile"> Invalid mobile number/मोबाइल नंबर अमान्य है</string>
+    <string name="otp_required">Otp is required/ओटीपी की आवश्यकता है</string>
+    <string name="select_member">Select Member</string>
+    <!--    <string name="valid_otp_required">4 digit valid otp is required/4 अंकों के वैध ओटीपी की आवश्यकता है</string>-->
+    <string name="valid_otp_required">Invalid OTP /अमान्य ओटीपी</string>
+    <string name="submit">Submit/सबमिट</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancl">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+</resources>
