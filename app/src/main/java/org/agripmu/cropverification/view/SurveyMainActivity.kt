@@ -50,6 +50,8 @@ class SurveyMainActivity : BaseActivity(){
         dismissProgress()
         binding.contentMain.contentProfile.imgProfile.setDrawableImage(R.drawable.ic_person, true)
 
+        getLocation()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -224,6 +226,7 @@ class SurveyMainActivity : BaseActivity(){
     }
 
     fun showImageInfo(view: View) {
+        getLocation()
         val uri = when (view) {
             binding.contentMain.contentProfile.imgProfileInfo -> mProfileUri
             binding.contentMain.contentCameraOnly.imgCameraInfo -> mCameraUri

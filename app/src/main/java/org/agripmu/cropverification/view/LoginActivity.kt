@@ -28,13 +28,13 @@ class LoginActivity : BaseActivity() {
         hideKeyboard(this, binding!!.edtUsername)
         when {
             TextUtils.isEmpty(binding!!.edtUsername.text.toString().trim()) -> {
-                showAlert(getString(R.string.mobile_required))
+                showBottomAlert(getString(R.string.mobile_required))
             }
             binding!!.edtUsername.text.toString().trim().length != 10 -> {
-                showAlert(getString(R.string.valid_mobile_required))
+                showBottomAlert(getString(R.string.valid_mobile_required))
             }
             !isValidMobile(binding!!.edtUsername.text.toString().trim()) -> {
-                showAlert(getString(R.string.invalid_mobile))
+                showBottomAlert(getString(R.string.invalid_mobile))
             }
             else -> {
                 showView(binding.edtOtp)
@@ -51,14 +51,15 @@ class LoginActivity : BaseActivity() {
         hideKeyboard(this, binding!!.edtOtp)
         when {
             TextUtils.isEmpty(binding!!.edtOtp.text.toString().trim()) -> {
-                showAlert(getString(R.string.otp_required))
+                showBottomAlert(getString(R.string.otp_required))
             }
             binding!!.edtOtp.text.toString().trim().length != 6 -> {
-                showAlert(getString(R.string.valid_otp_required))
+                showBottomAlert(getString(R.string.valid_otp_required))
             }
             else -> {
                 showProgress()
                 setIntent(SurveyMainActivity::class.java)
+                dismissProgress()
             }
         }
 

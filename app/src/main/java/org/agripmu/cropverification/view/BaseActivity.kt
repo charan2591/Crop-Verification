@@ -6,24 +6,39 @@ package org.agripmu.cropverification.view
 //import androidx.compose.ui.graphics.Color.Companion.White
 //import androidx.compose.ui.unit.dp
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.Patterns
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.agripmu.cropverification.R
 import java.util.*
 import java.util.regex.Pattern
@@ -32,11 +47,14 @@ open class BaseActivity : AppCompatActivity() {
 
     var progressDialog: Dialog? = null
     var conMgr : ConnectivityManager? = null
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private val permissionId = 2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         conMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     fun  setIntent(destination : Class<*>)
@@ -58,6 +76,63 @@ open class BaseActivity : AppCompatActivity() {
     protected fun dismissProgress() {
         if (isFinishing) return
         if (progressDialog != null) if (progressDialog!!.isShowing) progressDialog!!.dismiss()
+    }
+
+
+    protected fun showBottomAlert( message : String?)
+    {
+        // on below line we are creating a new bottom sheet dialog.
+        val dialog = BottomSheetDialog(this)
+
+        /* on below line we are inflating a layout file which we have created. */
+        val view = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_alert, null)
+
+        // on below line we are creating a variable for our button
+        // which we are using to dismiss our dialog.
+        val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
+        val txtMessage = view.findViewById<TextView>(R.id.alertMessage)
+
+        txtMessage.text = message
+
+        btnClose.setOnClickListener {
+            // on below line we are calling a dismiss
+            // method to close our dialog.
+            dialog.dismiss()
+        }
+        // below line is use to set cancelable to avoid
+        // closing of dialog box when clicking on the screen.
+        dialog.setCancelable(false)
+
+        // on below line we are setting
+        // content view to our view.
+        dialog.setContentView(view)
+
+        // on below line we are calling
+        // a show method to display a dialog.
+        dialog.show()
+    }
+
+    protected fun showBottomAlertWithConfirm()
+    {
+        // on below line we are creating a new bottom sheet dialog.
+        val dialog = BottomSheetDialog(this)
+
+        /* on below line we are inflating a layout file which we have created. */
+        val view = LayoutInflater.from(this).inflate(R.layout.bottom_sheet_del_dialog, null)
+
+        val btnOk = view.findViewById<Button>(R.id.idBtnDelete)
+        val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
+
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+        }
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
     protected fun showAlert(
@@ -195,5 +270,82 @@ open class BaseActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
 //        viewTransition()
+    }
+
+
+    @SuppressLint("MissingPermission")
+    protected fun getLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+                    val location: Location? = task.result
+                    if (location != null) {
+                        val geocoder = Geocoder(this, Locale.getDefault())
+                        val list: List<Address> =
+                            geocoder.getFromLocation(location.latitude, location.longitude, 1)!!
+
+                            showAlert( "Latitude\n${list[0].latitude}" +
+                                     "Longitude\n${list[0].longitude}" +
+                                     "Country Name\n${list[0].countryName}" +
+                                     "Locality\n${list[0].locality}" +
+                                     "Address\n${list[0].getAddressLine(0)}")
+//
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == permissionId) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLocation()
+            }
+        }
     }
 }
