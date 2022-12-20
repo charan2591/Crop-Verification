@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/bg_gradient"/>
+<!--    <item>-->
+<!--        <bitmap android:gravity="center"-->
+<!--            android:src="@drawable/ic_person"/>-->
+<!--    </item>-->
+
+<!--    <item>-->
+<!--        <bitmap-->
+<!--            android:gravity="center"-->
+<!--            android:src="@drawable/logo_art_1"/>-->
+<!--    </item>-->
+<!--    <item android:bottom="50dp"> // setting the image from bottom-->
+<!--        <bitmap-->
+<!--            android:gravity="bottom"-->
+<!--            android:src="@drawable/logo_art_2"/>-->
+<!--    </item>-->
+
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_person"/>
+    </item>
+    <item android:bottom="50dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@drawable/ic_github"/>
+    </item>
+</layer-list>

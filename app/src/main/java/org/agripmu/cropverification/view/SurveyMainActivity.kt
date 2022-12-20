@@ -46,11 +46,14 @@ class SurveyMainActivity : BaseActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        dismissProgress()
-        binding.contentMain.contentProfile.imgProfile.setDrawableImage(R.drawable.ic_person, true)
+        setSupportActionBar(binding.toolbar.root)
+        title = getString(R.string.app_name)
+        showBackArrow()
+        binding.contentMain.contentProfile.imgProfile
+            .setDrawableImage(R.drawable.ic_person, true)
 
-        getLocation()
+        hideStartLogo()
+        getLastLocation()
 
     }
 
@@ -226,7 +229,7 @@ class SurveyMainActivity : BaseActivity(){
     }
 
     fun showImageInfo(view: View) {
-        getLocation()
+        getLastLocation()
         val uri = when (view) {
             binding.contentMain.contentProfile.imgProfileInfo -> mProfileUri
             binding.contentMain.contentCameraOnly.imgCameraInfo -> mCameraUri

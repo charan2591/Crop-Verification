@@ -57,4 +57,7 @@
     <color name="colorSelectedGrey">#F3F3F2</color>
     <color name="colorSelectedTab">#36425A</color>
 
+    <color name="colorSlateGrey">#2C3E50</color>
+    <color name="colorOpacity">#99ffffff</color>
+
 </resources>

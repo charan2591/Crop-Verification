@@ -23,21 +23,23 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Html
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.birjuvachhani.locus.*
+import com.google.android.gms.location.LocationRequest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.agripmu.cropverification.R
 import java.util.*
@@ -45,16 +47,28 @@ import java.util.regex.Pattern
 
 open class BaseActivity : AppCompatActivity() {
 
+    private var textViewTitle: TextView? = null
+    private var textViewTotal: TextView? = null
+    private var linearSettings: LinearLayout? = null
+    private var imgStartLogo: AppCompatImageView? = null
     var progressDialog: Dialog? = null
+    private var actionBar : ActionBar? = null
     var conMgr : ConnectivityManager? = null
-    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+//    private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val permissionId = 2
-
+    var latitude = 0.0
+    var longitude = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         conMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val request = LocationRequest.create()
+        Intent(this, BaseActivity::class.java).apply {
+            putExtra("request", request)
+        }
+        Locus.setLogging(true)
     }
 
     fun  setIntent(destination : Class<*>)
@@ -78,6 +92,47 @@ open class BaseActivity : AppCompatActivity() {
         if (progressDialog != null) if (progressDialog!!.isShowing) progressDialog!!.dismiss()
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        overridePendingTransition(android.R.anim.bounce_interpolator, android.R.anim.cycle_interpolator)
+        finish()
+    }
+
+    override fun setSupportActionBar(toolbar: Toolbar?) {
+        super.setSupportActionBar(toolbar)
+        toolbar!!.title = ""
+        textViewTitle = toolbar.findViewById(R.id.toolbarTitle)
+        textViewTotal = toolbar.findViewById(R.id.toolbarTotal)
+        linearSettings = toolbar.findViewById(R.id.btnSettings)
+        imgStartLogo = toolbar.findViewById(R.id.start_logo)
+        actionBar = supportActionBar
+    }
+
+    override fun setTitle(title: CharSequence) {
+        if (textViewTitle != null) {
+            textViewTitle!!.text = Html.fromHtml("<b>$title")
+        } else {
+            actionBar!!.title = title
+        }
+    }
+
+    fun hideStartLogo() {
+        if (imgStartLogo != null) {
+            imgStartLogo!!.visibility = View.GONE
+        }
+    }
+
+    protected fun showBackArrow() {
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar!!.setDisplayShowHomeEnabled(true)
+    }
 
     protected fun showBottomAlert( message : String?)
     {
@@ -273,34 +328,34 @@ open class BaseActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("MissingPermission")
-    protected fun getLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-                    val location: Location? = task.result
-                    if (location != null) {
-                        val geocoder = Geocoder(this, Locale.getDefault())
-                        val list: List<Address> =
-                            geocoder.getFromLocation(location.latitude, location.longitude, 1)!!
-
-                            showAlert( "Latitude\n${list[0].latitude}" +
-                                     "Longitude\n${list[0].longitude}" +
-                                     "Country Name\n${list[0].countryName}" +
-                                     "Locality\n${list[0].locality}" +
-                                     "Address\n${list[0].getAddressLine(0)}")
+//    @SuppressLint("MissingPermission")
+//    protected fun getLocation() {
+//        if (checkPermissions()) {
+//            if (isLocationEnabled()) {
+//                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+//                    val location: Location? = task.result
+//                    if (location != null) {
+//                        val geocoder = Geocoder(this, Locale.getDefault())
+//                        val list: List<Address> =
+//                            geocoder.getFromLocation(location.latitude, location.longitude, 1)!!
 //
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        } else {
-            requestPermissions()
-        }
-    }
+//                            showAlert( "Latitude\n${list[0].latitude}" +
+//                                     "Longitude\n${list[0].longitude}" +
+//                                     "Country Name\n${list[0].countryName}" +
+//                                     "Locality\n${list[0].locality}" +
+//                                     "Address\n${list[0].getAddressLine(0)}")
+////
+//                    }
+//                }
+//            } else {
+//                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+//                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+//                startActivity(intent)
+//            }
+//        } else {
+//            requestPermissions()
+//        }
+//    }
 
     private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager =
@@ -344,8 +399,72 @@ open class BaseActivity : AppCompatActivity() {
     ) {
         if (requestCode == permissionId) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                getLocation()
+                getLastLocation()
             }
+        }
+    }
+
+
+
+    fun getLastLocation()
+    {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+        Locus.getCurrentLocation(this) { result ->
+            result.location?.let {
+                latitude =  result.location!!.latitude
+                longitude = result.location!!.longitude
+                val geocoder = Geocoder(this, Locale.getDefault())
+                val list: List<Address> = geocoder.getFromLocation(
+                    latitude,longitude,1)!!
+
+//                showAlert("Current Latitude : "  + latitude +" \n"
+//                        +"Current Longitude : "  + longitude +" \n"
+//                        +"Country Name : "  + {list[0].countryName} +" \n"
+//                        +"Locality : "  + {list[0].locality} +" \n"
+//                        +"Current Address : "  + {list[0].getAddressLine(0)} +" \n")
+                showAlert("Current Latitude : "  + latitude +" \n"
+                        +"Current Longitude : "  + longitude +" \n")
+
+                showLog("lat", result.location!!.latitude.toString())
+                showLog("lon", result.location!!.longitude.toString())
+            }
+            result.error?.let {
+                when
+                {
+                    result.error!!.isDenied ->
+                    {
+                        Log.e("GPS Result : ","Denied")
+                    }
+                    result.error!!.isPermanentlyDenied ->
+                    {
+                        Log.e("GPS Result : ","PermanentlyDenied")
+                    }
+                    result.error!!.isSettingsResolutionFailed ->
+                    {
+                        Log.e("GPS Result : ","SettingsResolutionFailed")
+                        getLastLocation()
+                    }
+                    result.error!!.isSettingsDenied ->
+                    {
+                        Log.e("GPS Result : ","SettingsDenied")
+                        getLastLocation()
+                    }
+                    result.error!!.isFatal ->
+                    {
+                        Log.e("GPS Result : ","Fatal")
+                    }
+                }
+            }
+        }
+
+            } else {
+                Toast.makeText(this, "Please turn on location", Toast.LENGTH_LONG).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
         }
     }
 }

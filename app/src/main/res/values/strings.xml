@@ -24,4 +24,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">Ok</string>
+    <string name="settings">Settings </string>
+
+    <string name="slide_one_top_text">Introduction </string>
+    <string name="slide_one_down_text">This app is used to verify crops </string>
+    <string name="slide_two_top_text">Benefits </string>
+    <string name="slide_two_down_text">The major benefit of this app is to provide proper transparency between farmer crops and their selling. </string>
+    <string name="slide_three_top_text">Facility </string>
+    <string name="slide_three_down_text">Major facilities available are providing reports of submissions and latest notifications to farmers. </string>
+    <string name="slide_four_top_text">Outcome </string>
+    <string name="slide_four_down_text">If this survey is properly done then best schemes can be implemented for the farmers welfare.  </string>
 </resources>

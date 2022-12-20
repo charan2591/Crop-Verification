@@ -58,7 +58,7 @@
             android:layout_marginTop="20dp"
             android:maxLength="10"
             android:singleLine="true"
-            android:background="@drawable/bg_edit_bck"
+            android:background="@drawable/bg_card_light_bck"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -82,13 +82,13 @@
             android:inputType="number"
             android:hint="Enter otp"
             android:visibility="gone"
-            android:textColor="@color/black"
+            android:textColor="@color/grey_900"
             android:textSize="14sp"
             android:padding="10dp"
             android:maxLength="6"
             android:layout_marginTop="16dp"
             android:singleLine="true"
-            android:background="@drawable/bg_edit_bck"
+            android:background="@drawable/bg_card_light_bck"
             />
 
         <androidx.appcompat.widget.AppCompatButton

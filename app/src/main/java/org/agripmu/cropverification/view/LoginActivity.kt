@@ -58,7 +58,7 @@ class LoginActivity : BaseActivity() {
             }
             else -> {
                 showProgress()
-                setIntent(SurveyMainActivity::class.java)
+                setIntent(HomeActivity::class.java)
                 dismissProgress()
             }
         }

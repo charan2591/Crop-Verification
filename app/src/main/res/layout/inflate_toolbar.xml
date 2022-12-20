@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/ToolBarStyle"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    android:background="@color/colorPrimary"
+    app:contentInsetStartWithNavigation="0dp">
+
+<!--    android:background="@drawable/bg_gradient_normal"-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/toolbarTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/colorWhite"-->
+<!--            android:textSize="@dimen/text_size_16"-->
+<!--            android:maxLines="1"-->
+<!--            android:textStyle="bold"-->
+<!--            />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/toolbarTotal"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/colorYellow"-->
+<!--            android:textSize="@dimen/text_size_12"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginEnd="@dimen/margin_12"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            />-->
+
+<!--    </RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_3">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/start_logo"
+            android:layout_width="@dimen/size_53"
+            android:layout_height="@dimen/size_53"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="start"
+            android:visibility="visible"
+            android:backgroundTint="@color/red_900"
+            android:layout_marginTop="@dimen/margin_7"
+            android:layout_marginBottom="@dimen/margin_7"
+            android:src="@drawable/gov_of_haryana_green"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_7"
+            android:layout_marginBottom="@dimen/margin_7"
+            android:layout_marginRight="@dimen/margin_30"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_size_17"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/toolbarTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="center"
+                android:visibility="gone"
+                android:maxLines="1"
+                android:textColor="@color/colorSlateGrey"
+                android:textSize="@dimen/txt_size_13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="end"
+            android:id="@+id/btnSettings"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_7"
+            android:layout_marginBottom="@dimen/margin_7"
+            android:layout_marginEnd="@dimen/margin_3"
+            android:onClick="btnSettings"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="@dimen/padding_10"
+                android:scaleType="centerInside"
+                app:tint="@color/colorSlateGrey"
+                android:src="@drawable/icon_settings_c"
+                android:visibility="visible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:visibility="gone"
+                android:background="@color/colorSlateGrey"
+                />
+
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/icon_size_40"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:textColor="@color/colorWhite"-->
+<!--                android:text="@string/settings"-->
+<!--                android:visibility="gone"-->
+<!--                android:textSize="@dimen/text_size_12" />-->
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>
