@@ -11,7 +11,7 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 //        setIntent(LoginActivity::class.java)
 
-        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+        startActivity(Intent(this@SplashActivity, AppIntroActivity::class.java))
         finish()
     }
 }

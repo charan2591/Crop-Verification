@@ -12,6 +12,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -38,10 +39,13 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.birjuvachhani.locus.*
 import com.google.android.gms.location.LocationRequest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.agripmu.cropverification.R
+import org.agripmu.cropverification.util.Config
 import java.util.*
 import java.util.regex.Pattern
 
@@ -55,9 +59,19 @@ open class BaseActivity : AppCompatActivity() {
     private var actionBar : ActionBar? = null
     var conMgr : ConnectivityManager? = null
 //    private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var sharedPreferences: SharedPreferences? = null
+    var editor: SharedPreferences.Editor? = null
     private val permissionId = 2
     var latitude = 0.0
     var longitude = 0.0
+
+//    companion object {
+//        init {
+//            //here goes static initializer code
+//             lateinit var sharedPreferences: SharedPreferences
+//             lateinit var editor: SharedPreferences.Editor
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +83,8 @@ open class BaseActivity : AppCompatActivity() {
             putExtra("request", request)
         }
         Locus.setLogging(true)
+
+        setPrefs()
     }
 
     fun  setIntent(destination : Class<*>)
@@ -76,6 +92,29 @@ open class BaseActivity : AppCompatActivity() {
         val intent = Intent(this,destination)
         startActivity(intent)
     }
+
+  private fun setPrefs() {
+        val masterKey: MasterKey = MasterKey.Builder(
+            this,
+            MasterKey.DEFAULT_MASTER_KEY_ALIAS
+        ).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+        sharedPreferences = EncryptedSharedPreferences.create(
+            this,
+            Config.PREF_HOME,
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        editor = sharedPreferences!!.edit()
+    }
+
+    fun setFirstRun()
+    {
+        editor!!.putBoolean(Config.FIRST_TIME,false)
+        editor!!.commit()
+    }
+
+    fun isFirstRun() = sharedPreferences!!.getBoolean(Config.FIRST_TIME,true)
 
     protected fun showProgress() {
         if (progressDialog == null) {

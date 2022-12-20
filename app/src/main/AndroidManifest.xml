@@ -37,6 +37,10 @@
                 android:value="" />
         </activity>
 
+        <activity android:name=".view.AppIntroActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"/>
+
         <activity android:name=".view.LoginActivity"
             android:exported="false"
             android:screenOrientation="fullSensor"/>
