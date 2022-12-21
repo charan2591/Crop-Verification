@@ -21,7 +21,12 @@
             android:padding="16dp">
 
             <include
+                android:id="@+id/content_survey_form"
+                layout="@layout/content_survey_form" />
+
+            <include
                 android:id="@+id/content_profile"
+                android:visibility="gone"
                 layout="@layout/content_profile" />
 
             <include
@@ -31,6 +36,20 @@
             <include
                 android:id="@+id/content_camera_only"
                 layout="@layout/content_camera_only" />
+
+            <TextView
+                android:id="@+id/txtCurrentLatLng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_13"
+                android:layout_marginEnd="@dimen/margin_13"
+                android:layout_marginTop="@dimen/margin_13"
+                android:padding="@dimen/padding_10"
+                android:layout_gravity="end"
+                android:text="LatLng : 0.0 , 0.0"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintTop_toBottomOf="@+id/txtFarmerNam"
+                tools:layout_editor_absoluteX="12dp" />
 
         </LinearLayout>
 

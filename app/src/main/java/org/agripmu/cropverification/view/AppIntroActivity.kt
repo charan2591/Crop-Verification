@@ -22,7 +22,6 @@ class AppIntroActivity : AppIntro() {
         super.onCreate(savedInstanceState)
 
         manager = BaseActivity()
-
         manager.hideStartLogo()
 
         val masterKey: MasterKey = MasterKey.Builder(
@@ -62,7 +61,6 @@ class AppIntroActivity : AppIntro() {
             .description(getString(R.string.slide_two_down_text))
             .imageDrawable(R.drawable.benefits_icon_a)
             .bgColor(getColor(R.color.slide_two))
-            .descTypeface()
             .build()
 
         val pageThree = SliderPagerBuilder()

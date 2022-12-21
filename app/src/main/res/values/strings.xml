@@ -6,8 +6,8 @@
     <string name="dept_name">DEPARTMENT OF AGRICULTURE AND FARMERS WELFARE, HARYANA</string>
     <string name="dept_name_hindi">कृषि और किसान कल्याण विभाग, हरियाणा</string>
 
-    <string name="action_camera_only">Camera Only</string>
-    <string name="action_gallery_only">Gallery Only</string>
+    <string name="action_camera_only">Take Picture from Camera Only</string>
+    <string name="action_gallery_only">Pick Image from Gallery Only</string>
 
     <string name="mobile_required">Mobile number is required/मोबाइल नंबर की आवश्यकता है</string>
     <string name="family_id_required">Family Id is required/परिवार की पहचान आवश्यक है</string>
@@ -25,6 +25,8 @@
     <string name="no">No</string>
     <string name="ok">Ok</string>
     <string name="settings">Settings </string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
+    <string name="internet_issue">Connectivity Issue Found.\n\nPlease check your internet connection and try again</string>
 
     <string name="slide_one_top_text">Introduction </string>
     <string name="slide_one_down_text">This app is used to verify crops </string>
@@ -34,4 +36,48 @@
     <string name="slide_three_down_text">Major facilities available are providing reports of submissions and latest notifications to farmers. </string>
     <string name="slide_four_top_text">Outcome </string>
     <string name="slide_four_down_text">If this survey is properly done then best schemes can be implemented for the farmers welfare.  </string>
+
+
+    <string-array name="district">
+        <item>Select District</item>
+        <item>Ambala</item>
+        <item>Bhiwani</item>
+        <item>Faridabad</item>
+        <item>Fatehabad</item>
+        <item>Gurugram</item>
+        <item>Hisar</item>
+        <item>Jhajjar</item>
+        <item>Kurukshetra</item>
+        <item>Karnal</item>
+        <item>Kaithal</item>
+        <item>Mewat</item>
+        <item>Narnaul</item>
+        <item>Panipat</item>
+        <item>Palwal</item>
+        <item>Rohtak</item>
+        <item>Sonipat</item>
+        <item>Yamunanagar</item>
+    </string-array>
+
+
+    <string-array name="tehsil">
+        <item>Select Tehsil</item>
+        <item>Ambala City</item>
+        <item>Ambala Cantt</item>
+        <item>Saha</item>
+        <item>Mullana</item>
+        <item>Barara</item>
+        <item>Shahzadpur </item>
+        <item>Naraingarh </item>
+    </string-array>
+
+
+    <string-array name="village">
+        <item>Select Village</item>
+    </string-array>
+
+    <string-array name="murabba">
+        <item>Select Murabba</item>
+    </string-array>
+
 </resources>

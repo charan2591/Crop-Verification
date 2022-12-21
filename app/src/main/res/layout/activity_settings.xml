@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/lightbck_green"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.SettingsActivity">
 
     <include
-        android:id="@+id/adtToolbar"
+        android:id="@+id/toolbar"
         layout="@layout/inflate_toolbar" />
 
     <LinearLayout

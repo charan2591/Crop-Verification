@@ -9,18 +9,10 @@
     android:background="@color/lightbck_green"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/inflate_toolbar"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +23,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
-            android:layout_height="180dp"
+            android:layout_height="160dp"
             android:layout_gravity="center"
             android:src="@drawable/agri_main_logo"
             />
@@ -42,8 +34,9 @@
             android:textColor="@color/colorDarkGrn"
             android:text="@string/dept_name"
             android:gravity="center"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:textSize="@dimen/txt_size_17"/>
+            android:textSize="@dimen/txt_size_15"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edt_username"

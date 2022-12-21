@@ -112,7 +112,7 @@
                 android:layout_height="50dp"
                 android:padding="@dimen/padding_10"
                 android:scaleType="centerInside"
-                app:tint="@color/colorSlateGrey"
+                app:tint="@color/color_mustard"
                 android:src="@drawable/icon_settings_c"
                 android:visibility="visible" />
 

@@ -46,6 +46,8 @@ class SurveyMainActivity : BaseActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getLastLocation()
+
         setSupportActionBar(binding.toolbar.root)
         title = getString(R.string.app_name)
         showBackArrow()
@@ -53,8 +55,6 @@ class SurveyMainActivity : BaseActivity(){
             .setDrawableImage(R.drawable.ic_person, true)
 
         hideStartLogo()
-        getLastLocation()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -230,6 +230,11 @@ class SurveyMainActivity : BaseActivity(){
 
     fun showImageInfo(view: View) {
         getLastLocation()
+
+        val latlng = "LatLng : " + latitude.toString() +
+                " , " +longitude.toString()
+        binding.contentMain.txtCurrentLatLng.text = latlng
+
         val uri = when (view) {
             binding.contentMain.contentProfile.imgProfileInfo -> mProfileUri
             binding.contentMain.contentCameraOnly.imgCameraInfo -> mCameraUri

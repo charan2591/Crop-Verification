@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightbck_green">
+
+    <TextView
+        android:id="@+id/txtNoOfKilla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        android:text="5"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/txtNoOfKillaLabel"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/txtNoOfKillaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_7"
+         android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:text="No of Killa*"
+        app:layout_constraintTop_toBottomOf="@+id/txtFarmerNam"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <TextView
+        android:id="@+id/txtFarmerNam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        android:text="Harjit Singh"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/txtFarmerNamLabel"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <TextView
+        android:id="@+id/txtFarmerNamLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_7"
+         android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:text="Farmer Name*"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMurabba"
+        tools:layout_editor_absoluteX="13dp" />
+
+    <Spinner
+        android:id="@+id/spinnerMurabba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:entries="@array/murabba"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        app:layout_constraintTop_toBottomOf="@+id/txtMurabba"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <TextView
+        android:id="@+id/txtMurabba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_7"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:text="Murabba*"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerVillage"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <Spinner
+        android:id="@+id/spinnerVillage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:entries="@array/village"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        app:layout_constraintTop_toBottomOf="@+id/txtVillage"
+        tools:layout_editor_absoluteX="104dp" />
+
+    <TextView
+        android:id="@+id/txtVillage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_7"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:text="Village*"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTehsil"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Spinner
+        android:id="@+id/spinnerTehsil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:entries="@array/tehsil"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/spinnerDistrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_7"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_3"
+        android:background="@drawable/bg_card_light_bck"
+        android:entries="@array/district"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="@dimen/padding_13"
+        android:paddingBottom="@dimen/padding_13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:text="District*"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="38dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10"
+        android:paddingBottom="0dp"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_13"
+        android:layout_marginTop="@dimen/margin_7"
+        android:text="Tehsil*"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDistrict"
+        tools:layout_editor_absoluteX="13dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

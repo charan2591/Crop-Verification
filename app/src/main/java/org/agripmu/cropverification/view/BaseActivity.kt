@@ -152,6 +152,10 @@ open class BaseActivity : AppCompatActivity() {
         linearSettings = toolbar.findViewById(R.id.btnSettings)
         imgStartLogo = toolbar.findViewById(R.id.start_logo)
         actionBar = supportActionBar
+
+        linearSettings!!.setOnClickListener {
+            setIntent(SettingsActivity::class.java)
+        }
     }
 
     override fun setTitle(title: CharSequence) {
@@ -171,6 +175,15 @@ open class BaseActivity : AppCompatActivity() {
     protected fun showBackArrow() {
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setDisplayShowHomeEnabled(true)
+    }
+
+    protected fun prefClearAll() {
+        editor!!.clear()
+        editor!!.commit()
+    }
+
+    fun isValid(`object`: Any?): Boolean {
+        return `object` != null
     }
 
     protected fun showBottomAlert( message : String?)

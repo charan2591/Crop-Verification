@@ -15,7 +15,7 @@ class LoginActivity : BaseActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 //        binding.toolbar.title = fragmentName
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         hideView(binding.edtOtp)
