@@ -208,7 +208,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bt_update"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/size_45"
                 app:layout_constraintTop_toBottomOf="@+id/layout_des"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

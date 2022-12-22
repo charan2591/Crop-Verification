@@ -57,7 +57,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_username"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_45"
             android:text="Submit"
             android:onClick="submitMobile"
             android:textColor="@color/white"
@@ -87,7 +87,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_otp"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_45"
             android:text="Login"
             android:onClick="login"
             android:textColor="@color/white"

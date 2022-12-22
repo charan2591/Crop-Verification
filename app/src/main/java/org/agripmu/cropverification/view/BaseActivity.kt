@@ -475,7 +475,7 @@ open class BaseActivity : AppCompatActivity() {
 //                        +"Country Name : "  + {list[0].countryName} +" \n"
 //                        +"Locality : "  + {list[0].locality} +" \n"
 //                        +"Current Address : "  + {list[0].getAddressLine(0)} +" \n")
-                showAlert("Current Latitude : "  + latitude +" \n"
+                showToast("Current Latitude : "  + latitude +" \n"
                         +"Current Longitude : "  + longitude +" \n")
 
                 showLog("lat", result.location!!.latitude.toString())

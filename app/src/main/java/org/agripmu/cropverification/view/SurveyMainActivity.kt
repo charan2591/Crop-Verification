@@ -13,8 +13,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.Observer
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -24,6 +26,7 @@ import org.agripmu.cropverification.R
 import org.agripmu.cropverification.databinding.ActivityMainBinding
 import org.agripmu.cropverification.util.ImageViewerDialog
 import org.agripmu.cropverification.util.IntentUtil
+import org.agripmu.cropverification.util.MyWorker
 import java.io.File
 
 class SurveyMainActivity : BaseActivity(){
@@ -40,13 +43,13 @@ class SurveyMainActivity : BaseActivity(){
     private var mGalleryUri: Uri? = null
     private var mProfileUri: Uri? = null
 
+    val workerRequest = OneTimeWorkRequestBuilder<MyWorker>().build()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(false)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        getLastLocation()
 
         setSupportActionBar(binding.toolbar.root)
         title = getString(R.string.app_name)
@@ -206,13 +209,22 @@ class SurveyMainActivity : BaseActivity(){
     }
 
     fun showImageCode(view: View) {
-        val resource = when (view) {
-            binding.contentMain.contentProfile.imgProfileCode -> mProfileUri.toString()
-            binding.contentMain.contentCameraOnly.imgCameraCode -> mCameraUri.toString()
-            binding.contentMain.contentGalleryOnly.imgGalleryCode -> mGalleryUri.toString()
-            else -> 0
+    workerFunc()
+        if(mProfileUri != null
+            || mCameraUri != null
+            ||mGalleryUri != null) {
+
+            val resource = when (view) {
+                binding.contentMain.contentProfile.imgProfileCode -> mProfileUri.toString()
+                binding.contentMain.contentCameraOnly.imgCameraCode -> mCameraUri.toString()
+                binding.contentMain.contentGalleryOnly.imgGalleryCode -> mGalleryUri.toString()
+                else -> 0
+            }
+            ImageViewerDialog.newInstance(resource as String).show(supportFragmentManager, "")
         }
-        ImageViewerDialog.newInstance(resource as String).show(supportFragmentManager, "")
+        else {
+            showToast("Image Not Found")
+        }
     }
 
     fun showImage(view: View) {
@@ -230,7 +242,6 @@ class SurveyMainActivity : BaseActivity(){
 
     fun showImageInfo(view: View) {
         getLastLocation()
-
         val latlng = "LatLng : " + latitude.toString() +
                 " , " +longitude.toString()
         binding.contentMain.txtCurrentLatLng.text = latlng
@@ -249,7 +260,7 @@ class SurveyMainActivity : BaseActivity(){
             .show()
     }
 
-    fun ImageView.setDrawableImage(@DrawableRes resource: Int, applyCircle: Boolean = false) {
+    private fun ImageView.setDrawableImage(@DrawableRes resource: Int, applyCircle: Boolean = false) {
         val glide = Glide.with(this).load(resource)
         if (applyCircle) {
             glide.apply(RequestOptions.circleCropTransform()).into(this)
@@ -258,13 +269,23 @@ class SurveyMainActivity : BaseActivity(){
         }
     }
 
-    fun ImageView.setLocalImage(uri: Uri, applyCircle: Boolean = false) {
+    private fun ImageView.setLocalImage(uri: Uri, applyCircle: Boolean = false) {
         val glide = Glide.with(this).load(uri)
         if (applyCircle) {
             glide.apply(RequestOptions.circleCropTransform()).into(this)
         } else {
             glide.into(this)
         }
+    }
+
+    private fun workerFunc(){
+        val workerRequest = OneTimeWorkRequestBuilder<MyWorker>().build()
+        WorkManager.getInstance(this).enqueue(workerRequest)
+        WorkManager.getInstance(this).getWorkInfoByIdLiveData(workerRequest.id)
+            .observe(this, Observer {
+                val workerStatus = it.state.name
+                showToast(workerStatus)
+            })
     }
 
 }
