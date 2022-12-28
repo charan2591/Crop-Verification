@@ -84,7 +84,7 @@ open class BaseActivity : AppCompatActivity() {
         }
         Locus.setLogging(true)
 
-        setPrefs()
+        setPrefs(this)
     }
 
     fun  setIntent(destination : Class<*>)
@@ -93,13 +93,13 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-  private fun setPrefs() {
+    fun setPrefs(context: Context?) {
         val masterKey: MasterKey = MasterKey.Builder(
-            this,
+            context!!,
             MasterKey.DEFAULT_MASTER_KEY_ALIAS
         ).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
         sharedPreferences = EncryptedSharedPreferences.create(
-            this,
+            context!!,
             Config.PREF_HOME,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
@@ -114,7 +114,7 @@ open class BaseActivity : AppCompatActivity() {
         editor!!.commit()
     }
 
-    fun isFirstRun() = sharedPreferences!!.getBoolean(Config.FIRST_TIME,true)
+    fun  isFirstRun() = sharedPreferences!!.getBoolean(Config.FIRST_TIME,true)
 
     protected fun showProgress() {
         if (progressDialog == null) {
@@ -169,6 +169,12 @@ open class BaseActivity : AppCompatActivity() {
     fun hideStartLogo() {
         if (imgStartLogo != null) {
             imgStartLogo!!.visibility = View.GONE
+        }
+    }
+
+    fun hideSettings() {
+        if (linearSettings != null) {
+            linearSettings!!.visibility = View.GONE
         }
     }
 

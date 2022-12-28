@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text=""
+                android:text="Title"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txt_size_17"
                 android:textStyle="bold" />

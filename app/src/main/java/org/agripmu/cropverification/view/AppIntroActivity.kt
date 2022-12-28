@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -19,23 +23,18 @@ class AppIntroActivity : AppIntro() {
     private lateinit var manager: BaseActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val decorView = window.decorView
+        // remove title
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState)
+
+//        window.statusBarColor = ContextCompat.getColor(this, R.color.colorName)
 
         manager = BaseActivity()
         manager.hideStartLogo()
-
-        val masterKey: MasterKey = MasterKey.Builder(
-            this,
-            MasterKey.DEFAULT_MASTER_KEY_ALIAS
-        ).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
-        manager.sharedPreferences = EncryptedSharedPreferences.create(
-            this,
-            Config.PREF_HOME,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-        manager.editor = manager.sharedPreferences!!.edit()
+        manager.setPrefs(this)
 
         if(manager.isFirstRun()){
             showIntroSlides()
@@ -48,11 +47,10 @@ class AppIntroActivity : AppIntro() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showIntroSlides() {
-        manager.setFirstRun()
         val pageOne = SliderPagerBuilder()
             .title(getString(R.string.slide_one_top_text))
             .description(getString(R.string.slide_one_down_text))
-            .imageDrawable(R.drawable.introduction_icon)
+            .imageDrawable(R.drawable.introduction_icon_b)
             .bgColor(getColor(R.color.slide_one))
             .build()
 
@@ -66,14 +64,14 @@ class AppIntroActivity : AppIntro() {
         val pageThree = SliderPagerBuilder()
             .title(getString(R.string.slide_three_top_text))
             .description(getString(R.string.slide_three_down_text))
-            .imageDrawable(R.drawable.facility_icon)
+            .imageDrawable(R.drawable.facility_c)
             .bgColor(getColor(R.color.slide_three))
             .build()
 
         val pageFour = SliderPagerBuilder()
             .title(getString(R.string.slide_four_top_text))
             .description(getString(R.string.slide_four_down_text))
-            .imageDrawable(R.drawable.outcome_icon)
+            .imageDrawable(R.drawable.outcome_icon_aa)
             .bgColor(getColor(R.color.slide_four))
             .build()
 
@@ -102,6 +100,7 @@ class AppIntroActivity : AppIntro() {
 
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
+        manager.setFirstRun()
         goToMain()
     }
 

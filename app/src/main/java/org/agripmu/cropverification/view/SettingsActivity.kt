@@ -19,6 +19,7 @@ class SettingsActivity : BaseActivity() {
         title = getString(R .string.settings)
         showBackArrow()
         hideStartLogo()
+        hideSettings()
     }
 
     fun btnLogout(view: View) {
